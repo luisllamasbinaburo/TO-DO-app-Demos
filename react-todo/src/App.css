@@ -1,0 +1,29 @@
+.app {
+  display: flex;
+}
+
+.task-list {
+  width: 30%;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.task-details {
+  width: 70%;
+  padding: 20px;
+}
+
+.task-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.task-list li {
+  cursor: pointer;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+.task-list li:hover {
+  background-color: #f0f0f0;
+}

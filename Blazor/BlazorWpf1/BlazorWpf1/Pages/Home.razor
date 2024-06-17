@@ -1,0 +1,34 @@
+﻿@page "/"
+@using BlazorWpf1.Component
+
+
+<TaskList TaskItems="TaskItems" OnTaskItemSelected="SelectTaskItem" />
+<TaskDetails SelectedTaskItem="SelectedTaskItem" />
+
+
+@code {
+    private List<TaskItem> TaskItems = new List<TaskItem>
+    {
+        new TaskItem { Id = 1, Description = "TaskItem 1", Date = new DateTime(2024, 6, 14) },
+        new TaskItem { Id = 2, Description = "TaskItem 2", Date = new DateTime(2024, 6, 15) }
+    };
+
+    private TaskItem SelectedTaskItem;
+
+    private void UpdateState(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+
+    private void SelectTaskItem(TaskItem task)
+    {
+        if (SelectedTaskItem != null)
+        {
+            SelectedTaskItem.PropertyChanged -= UpdateState;
+        }
+
+        SelectedTaskItem = task;
+        SelectedTaskItem.PropertyChanged += UpdateState;     
+    }
+}
+

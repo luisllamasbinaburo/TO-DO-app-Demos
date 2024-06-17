@@ -1,0 +1,36 @@
+﻿@if (SelectedTaskItem == null)
+{
+    <div class="task-details">Select a task to see details</div>
+}
+else
+{
+    <div class="task-details">
+        <h2>Task Details</h2>
+        <div>
+            <label>Description @SelectedTaskItem.Description</label>
+            <input type="text" @bind="SelectedTaskItem.Description"
+                   @bind:after="@(() => UpdateTask())"
+                   @bind:event="oninput" />
+        </div>
+        <div>
+            <label>Date:</label>
+            <input type="date" @bind="SelectedTaskItem.Date"                   
+                   @bind:after="@(() => UpdateTask())"
+                   @bind:event="oninput" />
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public TaskItem SelectedTaskItem { get; set; }
+
+    [Parameter]
+    public EventCallback<TaskItem> OnTaskItemUpdated { get; set; }
+
+
+    private void UpdateTask()
+    {
+        OnTaskItemUpdated.InvokeAsync(SelectedTaskItem);
+    }
+}
